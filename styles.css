@@ -395,7 +395,7 @@ p { margin: 0 0 1em; }
   margin: 2.5rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.5rem;
 }
 .video-card {
@@ -426,7 +426,49 @@ p { margin: 0 0 1em; }
   background: var(--terracotta) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/24px no-repeat;
   box-shadow: 0 10px 25px -8px rgba(0,0,0,0.5);
 }
-.video-title { padding: 0.9rem 1.1rem; font-weight: 600; font-size: 0.98rem; }
+.video-info { padding: 0.9rem 1.1rem 1.1rem; }
+.video-title { margin: 0 0 0.25rem; font-weight: 600; font-size: 0.98rem; }
+.video-tema { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.4; }
+.video-vistas { margin: 0; font-size: 0.85rem; font-weight: 700; color: var(--terracotta-dark); }
+.video-rank {
+  position: absolute; top: 0.6rem; left: 0.6rem;
+  padding: 0.2rem 0.6rem; border-radius: 999px;
+  background: var(--ink); color: var(--cream);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.85rem;
+}
+
+/* ---------- Tabla de vistas ---------- */
+.vistas-wrap { margin-top: 2rem; overflow-x: auto; }
+.vistas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+.vistas-table th, .vistas-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.vistas-table thead th {
+  background: var(--ink); color: var(--cream);
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
+}
+.vistas-table td a { font-weight: 600; text-decoration: none; }
+.vistas-table td a:hover { color: var(--terracotta); text-decoration: underline; }
+.vistas-table .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.vistas-table .rank { font-family: var(--font-display); color: var(--terracotta); font-weight: 600; width: 2.5rem; }
+.vistas-table td.col-tema { color: var(--ink-soft); }
+.vistas-table tbody tr:nth-child(odd) { background: rgba(240, 231, 216, 0.35); }
+.vistas-table tfoot td {
+  background: var(--cream-deep); font-weight: 700; border-bottom: 0;
+  font-family: var(--font-display); font-size: 1.05rem;
+}
+.vistas-table tfoot .num { color: var(--terracotta); font-size: 1.2rem; }
+.vistas-nota { margin: 0.6rem 0 0; font-size: 0.82rem; color: var(--ink-soft); }
+@media (max-width: 640px) {
+  .vistas-table .col-tema { display: none; }
+  .vistas-table th, .vistas-table td { padding: 0.65rem 0.75rem; }
+}
 
 /* ---------- Contacto ---------- */
 .contacto-inner { max-width: 900px; }

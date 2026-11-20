@@ -114,16 +114,23 @@ const FORMACION = [
 ];
 
 // ---------- ENTREVISTAS (YouTube) ----------
+// Para actualizar las vistas, cambia el número en "vistas" (sin comas).
+// La página las ordena sola de mayor a menor y calcula el total.
+const VISTAS_FECHA = "20 de noviembre de 2026";
+
 const VIDEOS = [
-  { id: "GvsjWLukdOw", nombre: "Annie Castillo" },
-  { id: "xXKBwJq3mH4", nombre: "Erick Guerrero Rosas" },
-  { id: "LXChvV1tvQA", nombre: "Omar Charaf" },
-  { id: "aHDOOcuOnTQ", nombre: "Poncho Pineda" },
-  { id: "NMq9dsfl_uw", nombre: "Duilio Davino" },
-  { id: "3iCK8_Y5vPE", nombre: "Juan Pablo Fernández" },
-  { id: "ATX8ktcmBpw", nombre: "Joaquín Kotkin" },
-  { id: "z5Vr7lO7REo", nombre: "Rafa Mercadante" },
-];
+  { id: "OeZgqAEu2ww", nombre: "Guille Santos", tema: "De la familia de George Soros a Richard Gere: secretos de una nanny", vistas: 788876 },
+  { id: "ZHPcBiVBRks", nombre: "Manuela Ímaz", tema: "El infierno de vivir con un narcisista y la verdad de Amigas y Rivales", vistas: 614083 },
+  { id: "GvsjWLukdOw", nombre: "Annie Castillo", tema: "¡Robaron el Melate! 160 millones: el robo del siglo", vistas: 240868 },
+  { id: "3h3Hgw2ebVg", nombre: "Duilio Davino", tema: "Se sincera sobre la pérdida de su hermano", vistas: 137041 },
+  { id: "z5Vr7lO7REo", nombre: "Rafael Mercadante", tema: "“Me corrieron sin avisar”: el lado oscuro de la exclusividad", vistas: 99453 },
+  { id: "LXChvV1tvQA", nombre: "Omar Charaf", tema: "El Bar Bar, famosos y futbol: anécdotas inéditas", vistas: 34102 },
+  { id: "IcdlGevZ0zM", nombre: "Bárbara Palmer", tema: "Caso Renata Palmer: la lucha de una familia contra la impunidad", vistas: 31955 },
+  { id: "XaZz4QFLurU", nombre: "Laura Iturbide", tema: "El 11-S contado por una mexicana", vistas: 17564 },
+  { id: "562UZ7BfhTg", nombre: "Rebeca Ojeda", tema: "No tenía para comer; hoy es Top 3 de Farmasi en México", vistas: 6010 },
+].sort((a, b) => b.vistas - a.vistas);
+
+const fmt = (n) => n.toLocaleString("es-MX");
 
 // ============================================================
 // Render helpers
@@ -193,8 +200,13 @@ function renderVideos() {
           <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg"
                alt="Miniatura de la entrevista con ${v.nombre}" loading="lazy">
           <span class="play-btn"></span>
+          <span class="video-rank">#${i + 1}</span>
         </div>
-        <p class="video-title">${v.nombre}</p>
+        <div class="video-info">
+          <p class="video-title">${v.nombre}</p>
+          <p class="video-tema">${v.tema}</p>
+          <p class="video-vistas">${fmt(v.vistas)} vistas</p>
+        </div>
       </li>`
   ).join("");
 
@@ -221,6 +233,33 @@ function renderVideos() {
       { once: true }
     );
   });
+}
+
+function renderVistas() {
+  const el = document.getElementById("vistasTabla");
+  if (!el) return;
+  const total = VIDEOS.reduce((sum, v) => sum + v.vistas, 0);
+  el.innerHTML = `
+    <table class="vistas-table">
+      <thead>
+        <tr><th>#</th><th>Invitado</th><th class="col-tema">Entrevista</th><th class="num">Vistas</th></tr>
+      </thead>
+      <tbody>
+        ${VIDEOS.map((v, i) => `
+          <tr>
+            <td class="rank">${i + 1}</td>
+            <td><a href="https://youtu.be/${v.id}" target="_blank" rel="noopener noreferrer">${v.nombre}</a></td>
+            <td class="col-tema">${v.tema}</td>
+            <td class="num">${fmt(v.vistas)}</td>
+          </tr>`).join("")}
+      </tbody>
+      <tfoot>
+        <tr><td></td><td>Total</td><td class="col-tema">${VIDEOS.length} entrevistas</td><td class="num">${fmt(total)}</td></tr>
+      </tfoot>
+    </table>
+    <p class="vistas-nota">Vistas en YouTube al ${VISTAS_FECHA}.</p>`;
+  const totalEl = document.getElementById("vistasTotal");
+  if (totalEl) totalEl.textContent = fmt(total);
 }
 
 // ============================================================
@@ -287,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCompetencias();
   renderFormacion();
   renderVideos();
+  renderVistas();
   setupNav();
   setupReveal();
   setupYear();
