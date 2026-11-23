@@ -6,6 +6,10 @@
 
 // ---------- CIFRAS DESTACADAS ----------
 const STATS = [
+  { number: "+35M", label: "de impresiones en YouTube con Líderes por México" },
+  { number: "+4M", label: "de vistas en entrevistas, clips y Shorts" },
+  { number: "+247%", label: "de crecimiento en suscriptores: de ~6K a +21.7K en 8 meses" },
+  { number: "~190K", label: "horas de visualización generadas por una sola entrevista" },
   { number: "+20", label: "años de experiencia en Servicio al Cliente" },
   { number: "#1", label: "Costumer a nivel mundial en Doctoralia (entre 5 países)" },
   { number: "96%", label: "de engagement logrado con su equipo" },
@@ -16,6 +20,17 @@ const STATS = [
 
 // ---------- TRAYECTORIA ----------
 const TRAYECTORIA = [
+  {
+    puesto: "Host",
+    empresa: "Líderes por México",
+    fecha: "2026 – Actualidad",
+    bullets: [
+      "Conduje 19 entrevistas a fondo con figuras del entretenimiento, deporte, negocios y política.",
+      "Mi contenido (entrevistas, clips y Shorts) suma más de 4 millones de vistas.",
+      "Contribuí a que el canal triplicara sus suscriptores: de ~6K a +21.7K en 8 meses (+247%).",
+      "Mis entrevistas son los 3 videos más vistos del canal en el periodo; solo una de ellas generó ~190 mil horas de visualización.",
+    ],
+  },
   {
     puesto: "Control de Inventarios, Insumos y Producción",
     empresa: "Tequila Lobos 1707",
